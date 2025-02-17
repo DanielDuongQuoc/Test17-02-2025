@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #333;
+    }
+
+    .table {
+        margin-top: 20px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+    .table th, .table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+<div class="container mt-5">
+    <section class="property-list">
+        <h2 class="mb-3">Danh Sách Bất Động Sản</h2>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>Tên Bất Động Sản</th>
+                    <th>Vị Trí</th>
+                    <th>Loại</th>
+                    <th>Giá</th>
+                    <th>Trạng Thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for property in properties %}
+                <tr>
+                    <td>{{ property[1] }}</td>
+                    <td>{{ property[2] }}</td>
+                    <td>{{ property[3] }}</td>
+                    <td>{{ property[4] }}</td>
+                    <td>{{ property[5] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</div>
+{% endblock %}

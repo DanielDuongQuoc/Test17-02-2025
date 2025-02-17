@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #333;
+        padding: 10px 20px;
+    }
+    .navbar .logo {
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 15px;
+    }
+    .nav-links li {
+        display: inline;
+    }
+    .nav-links a {
+        color: #fff;
+        text-decoration: none;
+        padding: 5px 10px;
+        transition: background-color 0.3s;
+    }
+    .nav-links a:hover {
+        background-color: #575757;
+        border-radius: 5px;
+    }
+    .search-section {
+        text-align: center;
+        padding: 50px 20px;
+        background-color: #f4f4f4;
+    }
+    .search-box {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+    .search-box input {
+        padding: 10px;
+        width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .search-box button {
+        padding: 10px 20px;
+        border: none;
+        background-color: #333;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .search-box button:hover {
+        background-color: #575757;
+    }
+    .banner {
+        text-align: center;
+        padding: 50px 20px;
+        background-color: #333;
+        color: #fff;
+    }
+    .contact-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        background-color: #f4f4f4;
+    }
+    .contact-buttons a {
+        color: #333;
+        font-size: 24px;
+        transition: color 0.3s;
+    }
+    .contact-buttons a:hover {
+        color: #575757;
+    }
+    footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #333;
+        color: #fff;
+    }
+</style>
+<section class="edit-property">
+    <h2>Sửa Thông Tin Bất Động Sản</h2>
+    <form method="POST" action="{{ url_for('edit_property', property_id=property[0]) }}">
+        <input type="text" name="property_name" value="{{ property[1] }}" required>
+        <input type="text" name="location" value="{{ property[2] }}" required>
+        <input type="text" name="type" value="{{ property[3] }}" required>
+        <input type="number" step="1000000" name="price" value="{{ property[4] }}" required>
+        <input type="text" name="status" value="{{ property[5] }}" required>
+        <button type="submit">Cập Nhật</button>
+    </form>
+</section>
+{% endblock %}

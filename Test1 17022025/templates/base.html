@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TPT Bất Động Sản</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px 20px;
+        }
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .logo img {
+            width: 100px;
+        }
+        .navbar .logo-text {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            margin-left: 10px;
+            color: #ffcc00; /* Nice color for the text */
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+        .nav-links li {
+            display: inline;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            transition: background-color 0.3s;
+        }
+        .nav-links a:hover {
+            background-color: #575757;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='uploads/logo.png') }}" alt="Logo Công Ty">
+                <span class="logo-text">Bất Động Sản TPT</span>
+            </div>            
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Trang Chủ</a></li>
+                <li><a href="{{ url_for('properties') }}">Bất Động Sản</a></li>
+                <li><a href="{{ url_for('manage') }}">Quản Lý</a></li>
+                <li><a href="#">Giới Thiệu</a></li>
+                <li><a href="#">Dịch Vụ</a></li>
+                <li><a href="#">Liên Hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        <p>&copy; 2025 TPT Bất Động Sản. All rights reserved.</p>
+    </footer>
+</body>
+</html>

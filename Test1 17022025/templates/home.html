@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .bg {
+        background-image: url('/static/uploads/home.png');
+        height: 100vh;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        position: relative;
+    }
+
+    .welcome-text {
+        background: rgba(0, 0, 0, 0.7); /* Darker background for better readability */
+        padding: 40px; /* Increased padding for better spacing */
+        border-radius: 15px; /* Slightly more rounded corners */
+        max-width: 80%; /* Limit the width of the text container */
+        opacity: 1;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .hidden {
+        opacity: 0;
+    }
+
+    .search-container {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-box {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .search-input {
+        border: none;
+        padding: 10px;
+        flex: 1;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .search-button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .filter-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .filter-button {
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .filter-button.active {
+        background: #007bff;
+        color: white;
+    }
+
+    .filter-options {
+        display: flex;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .filter-group label {
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .filter-group select {
+        padding: 5px;
+        font-size: 14px;
+        color: #333;
+    }
+</style>
+<div class="bg">
+    <div class="search-container">
+        <form class="search-box" method="GET" action="{{ url_for('search') }}">
+            <input type="text" name="keyword" class="search-input" placeholder="Nhập từ khóa">
+            <button type="submit" class="search-button">Tìm Kiếm</button>
+        </form>
+
+        <div class="filter-buttons">
+            <button class="filter-button active">BẤT ĐỘNG SẢN BÁN</button>
+            <button class="filter-button">BẤT ĐỘNG SẢN CHO THUÊ</button>
+        </div>
+
+        <div class="filter-options">
+            <div class="filter-group">
+                <label for="property-type">Loại bất động sản</label>
+                <select id="property-type">
+                    <option value="">Tất cả</option>
+                    <option value="apartment">Căn hộ</option>
+                    <option value="house">Nhà phố</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="location">Vị trí</label>
+                <select id="location">
+                    <option value="">Tất cả</option>
+                    <option value="hanoi">Hà Nội</option>
+                    <option value="saigon">Hồ Chí Minh</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="welcome-text" id="welcome-text">
+        <h1>Chào Mừng Đến Với Bất Động Sản TPT</h1>
+        <p>Gửi niềm tin, nhận lại điều xứng đáng</p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quản lý Bất động sản</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<style>
+   body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+}
+
+.table {
+    margin-top: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+</style>
+<body>
+    {% extends "base.html" %}
+
+    {% block content %}
+    <div class="container mt-5">
+        <h2 class="mb-4">Danh Sách Bất Động Sản</h2>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>Tên Bất Động Sản</th>
+                    <th>Vị Trí</th>
+                    <th>Loại</th>
+                    <th>Giá</th>
+                    <th>Trạng Thái</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for property in properties %}
+                <tr>
+                    <td>{{ property[1] }}</td>
+                    <td>{{ property[2] }}</td>
+                    <td>{{ property[3] }}</td>
+                    <td>{{ property[4] | float | round(2) | string | replace('.', ',') }} VND</td>
+                    <td>{{ property[5] }}</td>
+                    <td>
+                        <a href="{{ url_for('edit_property', property_id=property[0]) }}" class="btn btn-sm btn-warning">Sửa</a>
+                        <form method="POST" action="{{ url_for('remove_property', property_id=property[0]) }}" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+        <h2 class="mt-5">Thêm Bất Động Sản</h2>
+        <form method="POST" action="{{ url_for('manage') }}" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="property_name">Tên Bất Động Sản</label>
+                <input type="text" name="property_name" class="form-control" placeholder="Tên Bất Động Sản" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Vị Trí</label>
+                <input type="text" name="location" class="form-control" placeholder="Vị Trí" required>
+            </div>
+            <div class="form-group">
+                <label for="type">Loại</label>
+                <input type="text" name="type" class="form-control" placeholder="Loại" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Giá</label>
+                <input type="number" step="0.01" name="price" class="form-control" placeholder="Giá" required>
+            </div>
+            <div class="form-group">
+                <label for="status">Trạng Thái</label>
+                <input type="text" name="status" class="form-control" placeholder="Trạng Thái" required>
+            </div>
+            <div class="form-group">
+                <label for="image">Hình Ảnh</label>
+                <input type="file" name="image" class="form-control-file">
+            </div>
+            <button type="submit" class="btn btn-primary">Thêm</button>
+        </form>
+    </div>
+    {% endblock %}
+</body>
+</html>
