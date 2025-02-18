@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .add-property {
+        background-color: #f9f9f9; /* Màu nền nhẹ cho section form */
+        padding: 20px;
+        border-radius: 5px; /* Bo góc section form */
+        border: 1px solid #e0e0e0; /* Viền section form */
+        margin-top: 20px; /* Khoảng cách phía trên section form */
+    }
+
+    .add-property h2 {
+        color: #333; /* Màu tiêu đề form */
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px; /* Tăng kích thước tiêu đề */
+    }
+
+    .add-property form div {
+        margin-bottom: 15px; /* Khoảng cách giữa các dòng trường */
+    }
+
+    .add-property form label {
+        display: block; /* Nhãn trên dòng riêng */
+        margin-bottom: 5px;
+        font-weight: bold; /* In đậm nhãn */
+        color: #555;
+    }
+
+    .add-property form input[type="text"],
+    .add-property form input[type="number"],
+    .add-property form textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc; /* Viền trường nhập liệu */
+        border-radius: 3px; /* Bo góc trường nhập liệu */
+        box-sizing: border-box; /* Tính padding và border vào width */
+        font-size: 16px; /* Tăng kích thước chữ trong trường nhập liệu */
+        margin-bottom: 5px; /* Khoảng cách dưới trường nhập liệu */
+    }
+
+    .add-property form textarea {
+        height: 120px; /* Chiều cao textarea */
+    }
+
+    .add-property form input[type="text"]:focus,
+    .add-property form input[type="number"]:focus,
+    .add-property form textarea:focus {
+        border-color: #007bff; /* Màu viền khi focus */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Đổ bóng khi focus */
+        outline: none; /* Loại bỏ viền mặc định khi focus */
+    }
+
+
+    .add-property form button[type="submit"] {
+        background-color: #28a745; /* Màu nền nút "Thêm" - xanh lá cây */
+        color: white; /* Màu chữ nút "Thêm" */
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px; /* Bo góc nút "Thêm" */
+        cursor: pointer;
+        font-size: 18px; /* Tăng kích thước chữ nút "Thêm" */
+        transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu khi hover */
+    }
+
+    .add-property form button[type="submit"]:hover {
+        background-color: #218838; /* Màu nền nút "Thêm" khi hover - xanh lá cây đậm hơn */
+    }
+</style>
+
+<section class="add-property">
+        <h2>Thêm Bất Động Sản</h2>
+        <form action="{{ url_for('property.add') }}" method="POST" enctype="multipart/form-data">
+            <div>
+                <label for="property_name">Tên Bất Động Sản:</label>
+                <input type="text" id="property_name" name="property_name" required>
+            </div>
+            <div>
+                <label for="location">Vị Trí:</label>
+                <input type="text" id="location" name="location" required>
+            </div>
+            <div>
+                <label for="type">Loại:</label>
+                <input type="text" id="type" name="type" required>
+            </div>
+            <div>
+                <label for="price">Giá:</label>
+                <input type="number" id="price" name="price" required>
+            </div>
+            <div>
+                <label for="status">Trạng Thái:</label>
+                <input type="text" id="status" name="status" required>
+            </div>
+    
+             <div>
+                <label for="image_upload">**Tải Ảnh Lên (Để lưu vào website):**</label>
+                <input type="file" id="image_upload" name="image_upload" accept="image/*">
+            </div>
+    
+            <div>
+        <label for="image_url">**Hoặc Dán URL Hình Ảnh (Để hiển thị từ internet):**</label>
+        <input type="text" id="image_url" name="image_url" oninput="updateImagePreview()">
+    </div>
+    
+    <div>
+        <img id="image_preview" src="" alt="Image Preview" style="max-width: 100%; display: none;">
+    </div>
+    
+    <script>
+        function updateImagePreview() {
+            const imageUrl = document.getElementById('image_url').value;
+            const imagePreview = document.getElementById('image_preview');
+            if (imageUrl) {
+                imagePreview.src = imageUrl;
+                imagePreview.style.display = 'block';
+            } else {
+                imagePreview.style.display = 'none';
+            }
+        }
+    </script>
+    
+            <div>
+                <label for="description">Mô Tả:</label>
+                <textarea id="description" name="description"></textarea>
+            </div>
+            <div>
+                <label for="specs">Thông Số:</label>
+                <textarea id="specs" name="specs"></textarea>
+            </div>
+            <div>
+                <label for="area">Diện Tích:</label>
+                <input type="number" id="area" name="area">
+            </div>
+            <div>
+                <label for="bathrooms">Phòng Tắm:</label>
+                <input type="number" id="bathrooms" name="bathrooms">
+            </div>
+            <div>
+                <label for="bedrooms">Phòng Ngủ:</label>
+                <input type="number" id="bedrooms" name="bedrooms">
+            </div>
+            <div>
+                <label for="direction">Hướng:</label>
+                <input type="text" id="direction" name="direction">
+            </div>
+            <button type="submit">Thêm</button>
+        </form>
+    </section>
+{% endblock %}
